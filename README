@@ -1,0 +1,48 @@
+Tema la PA.
+Nivel de dificultate: n-am avut o tema asa grea pana acum
+Timp de lucru:
+
+Problema 1.
+
+    M-am inspirat de la problema Z-parcurgere din laboratorul 1. Folosind
+recursivitate, am luat cazul de baza cand coltul din stanga sus este egal
+cu coltul din dreapta jos, asta insemnand ca am o ramas cu o singura celula
+(un patrat mic, cu valoare de 0 sau 1, depinzand daca am intrat sau nu in
+cadranul 4, unde toate valorile sunt negate). Am calculat mijlocul patratului
+curent, ca sa stiu in ce parte trebuie sa ma duc in continuare, apoi am
+apelat recursiv functia "solve" pentru fiecare sub-patrat urmator.
+
+Complexitatea este O(x * n) = O(n)
+
+Problema 2.
+
+    In primul rand, am creat o functie pentru a vedea numarul de aparitii al
+unei litere intr-un cuvant. In functia solve am initializat un counter care sa
+imi tina minte nr maxim de cuvinte concatenate, nr de cuvinte pe care le concatenez
+la o litera, nr de total de aparitii dintr-un cuvant, si numarul total de litere
+dintr-un cuvant. Iterez prin toate literele din alfabet, sortez Arraylist-ul dupa
+regula (2 * nr de aparitii al literei - lungimea cuvantului rezultat) pentru fiecare
+litera in parte. Apoi iterez prin Arraylist-ul de cuvinte, iar, cu fiecare concatenare,
+daca inca numarul de aparitii este de 2 ori mai mare decat numarul total de litere din
+cuvant, maresc numarul de cuvinte concatenate. Ulterior contorul ia valoarea numarului
+de cuvinte concatenate, apoi resetez totul la 0 pentru urmatoarea litera.
+
+Problema 3.
+
+    M-am inspirat din 2 surse: laboratorul 3 pentru a folosi problema rucsacului pentru
+numarul maxim de puncte. Alegem cea mai buna solutie dintre dp[i][j] si dp[i-1][j-steps[i]]
++ punctele de pe pozitia i. Solutia e stocata in ultimul element din matrice, din dreapta
+jos. A doua sursa de unde m-am inspirat este:
+https://www.geeksforgeeks.org/minimum-number-of-moves-to-make-m-and-n-equal-by-repeatedly-adding-any-divisor-of-number-to-itself-except-1-and-the-number/
+pentru a calcula pasii necesari pentru fiecare element din vectorul target. In primul rand,
+declar vectorul de pasi, caut maximul din vectorul target pentru ca, in cel mai prost caz,
+solutia ar fi formata din adunari repetate de 1, ceea ce face ca in vectorul dp sa se gaseasca
+solutia pentru fiecare dintre targeturile mele. Parcurg intervalul [1, target], iar cu un j care
+merge pana la radical din i, pentru a adauga 2 numere in vectorul de solutii si a avea un timp
+mai bun. Daca suma numarului cu divizorul sau este mai mica decat maximul din vectorul target,
+solutia devine minimul dintre dp[i + j] si dp[i] + 1 pentru a lua calea cea mai scurta (daca exista
+un numar mai mic de pasi sau adaug 1 la numarul de divizori ai numarului precedent). Acelasi lucru
+fac si pentru i + i/j deoarece merg pana la radicalul numarului. La sfarsit, adaug solutiile pentru
+targeturile mele in vectorul de pasi. Daca suma pasilor este mai mica decat capacitatea maxima a
+rucsacului, nu mai e nevoie sa apelez functia knapsack, deoarece e clar ca iau toate elementele din
+vectorul meu si afisez suma totala a punctelor.
